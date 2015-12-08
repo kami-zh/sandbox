@@ -126,6 +126,102 @@ $(function() {
   });
 
   app.AppView = Backbone.View.extend({
+    el: '.todoapp',
+
+    statsTemplate: _.template($('#stats-template').html()),
+
+    events: {
+      'keypress .new-todo': 'createOnEnter',
+      'click .clear-completed': 'clearCompleted',
+      'click .toggle-all': 'toggleAllComplete'
+    },
+
+    initialize: function() {
+      this.allCheckbox = this.$('.toggle-all')[0];
+      this.$input = this.$('.new-todo');
+      this.$footer = this.$('.footer');
+      this.$main = this.$('.main');
+      this.$list = $('.todo-list');
+
+      this.listenTo(app.ToDos, 'add', this.addOne);
+      this.listenTo(app.ToDos, 'reset', this.addAll);
+      this.listenTo(app.ToDos, 'change:completed', this.filterOne);
+      this.listenTo(app.ToDos, 'filter', this.filterAll);
+      this.listenTo(app.ToDos, 'all', _.debounce(this.render, 0));
+
+      app.ToDos.fetch({ reset: true });
+    },
+
+    render: function() {
+      var completed = app.ToDos.completed().length;
+      var remaining = app.ToDos.remaining().length;
+
+      if (app.todos.length) {
+        this.$main.show();
+        this.$footer.show();
+
+        this.$footer.html(this.statsTemplate({
+          completed: completed,
+          remaining: remaining
+        }));
+
+        this.$('.filters li a')
+          .removeClass('selected')
+          .filter('[href="#/' + (app.ToDoFilter || '') + '"]')
+          .addClass('selected');
+      } else {
+        this.$main.hide();
+        this.$footer.hide();
+      }
+
+      this.allCheckbox.checked = !remaining;
+    },
+
+    addOne: function(todo) {
+      var view = new app.ToDoView({ model: todo });
+      this.$list.append(view.render().el);
+    },
+
+    addAll: function() {
+      this.$list.html('');
+      this.todos.each(this.addOne, this);
+    },
+
+    filterOne: function(todo) {
+      todo.trigger('visible');
+    },
+
+    filterAll: function() {
+      app.ToDos.each(this.filterOne, this);
+    },
+
+    newAttributes: function() {
+      return {
+        title: this.$input.val().trim(),
+        order: app.ToDos.nextOrder(),
+        completed: false
+      };
+    },
+
+    createOnEnter: function(e) {
+      if (e.which === ENTER_KEY && this.$input.val().trim()) {
+        app.ToDos.create(this.newAttributes());
+        this.$input.val('');
+      }
+    },
+
+    clearCompleted: function() {
+      _.invoke(app.ToDos.completed(), 'destroy');
+      return false;
+    },
+
+    toggleAllComplete: function() {
+      var completed = this.allCheckbox.checked;
+
+      app.ToDos.each(function(todo) {
+        todo.save({ completed: completed });
+      });
+    }
   });
 
   new app.AppView();
