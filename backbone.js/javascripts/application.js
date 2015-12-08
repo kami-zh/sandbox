@@ -224,5 +224,20 @@ $(function() {
     }
   });
 
+  var ToDoRouter = Backbone.Router.extend({
+    routes: {
+      '*filter': 'setFilter'
+    },
+
+    setFilter: function(param) {
+      app.ToDoFilter = param || '';
+      app.ToDos.trigger('filter');
+    }
+  });
+
+  app.ToDoRouter = new ToDoRouter();
+
+  Backbone.history.start();
+
   new app.AppView();
 });
