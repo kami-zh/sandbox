@@ -33,7 +33,7 @@ $(function() {
     },
 
     nextOrder: function() {
-      return this.length? this.last().get('order') + 1 : 1;
+      return this.length ? this.last().get('order') + 1 : 1;
     },
 
     comparator: 'order'
