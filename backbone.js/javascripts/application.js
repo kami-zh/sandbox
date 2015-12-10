@@ -156,7 +156,7 @@ $(function() {
       var completed = app.ToDos.completed().length;
       var remaining = app.ToDos.remaining().length;
 
-      if (app.todos.length) {
+      if (app.ToDos.length) {
         this.$main.show();
         this.$footer.show();
 
@@ -184,7 +184,7 @@ $(function() {
 
     addAll: function() {
       this.$list.html('');
-      this.todos.each(this.addOne, this);
+      app.ToDos.each(this.addOne, this);
     },
 
     filterOne: function(todo) {
