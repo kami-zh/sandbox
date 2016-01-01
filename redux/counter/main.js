@@ -36,3 +36,32 @@ function incrementAsync(delay = 1000) {
     }, delay);
   };
 }
+
+//
+// Reducers
+//
+
+import { combineReducers } from 'redux';
+
+function counter(state = 0, action) {
+  switch (action.type) {
+    case INCREMENT_COUNTER:
+      return state + 1;
+    case DECREMENT_COUNTER:
+      return state - 1;
+    default:
+      return state;
+  }
+}
+
+const reducer = combineReducers({
+  counter
+});
+
+//
+// Stores
+//
+
+import { createStore } from 'redux';
+
+const store = createStore(reducer);
