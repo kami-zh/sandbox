@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "sources": [
+    "node_modules/browserify/node_modules/browser-pack/_prelude.js",
+    "main.js"
+  ],
+  "names": [],
+  "mappings": "AAAA;;;;;;;ACIA,IAAM,iBAAiB,GAAG,mBAAmB,CAAC;AAC9C,IAAM,iBAAiB,GAAG,mBAAmB,CAAC;;AAE9C,SAAS,SAAS,GAAG;AACnB,SAAO;AACL,QAAI,EAAE,iBAAiB;GACxB,CAAC;CACH;;AAED,SAAS,SAAS,GAAG;AACnB,SAAO;AACL,QAAI,EAAE,iBAAiB;GACxB,CAAC;CACH;;AAED,SAAS,cAAc,GAAG;AACxB,SAAO,UAAC,QAAQ,EAAE,QAAQ,EAAK;oBACT,QAAQ,EAAE;;QAAtB,OAAO,aAAP,OAAO;;AAEf,QAAI,AAAC,OAAO,GAAG,CAAC,KAAM,CAAC,EAAE;AACvB,aAAO;KACR;;AAED,YAAQ,CAAC,SAAS,EAAE,CAAC,CAAC;GACvB,CAAC;CACH;;AAED,SAAS,cAAc,GAAe;MAAd,KAAK,yDAAG,IAAI;;AAClC,SAAO,UAAA,QAAQ,EAAI;AACjB,cAAU,CAAC,YAAM;AACf,cAAQ,CAAC,SAAS,EAAE,CAAC,CAAA;KACtB,EAAE,KAAK,CAAC,CAAC;GACX,CAAC;CACH",
+  "file": "generated.js",
+  "sourceRoot": "",
+  "sourcesContent": [
+    "(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==\"function\"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error(\"Cannot find module '\"+o+\"'\");throw f.code=\"MODULE_NOT_FOUND\",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==\"function\"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})",
+    "//\n// Actions\n//\n\nconst INCREMENT_COUNTER = 'INCREMENT_COUNTER';\nconst DECREMENT_COUNTER = 'DECREMENT_COUNTER';\n\nfunction increment() {\n  return {\n    type: INCREMENT_COUNTER\n  };\n}\n\nfunction decrement() {\n  return {\n    type: DECREMENT_COUNTER\n  };\n}\n\nfunction incrementIfOdd() {\n  return (dispatch, getState) => {\n    const { counter } = getState();\n\n    if ((counter % 2) === 0) {\n      return;\n    }\n\n    dispatch(increment());\n  };\n}\n\nfunction incrementAsync(delay = 1000) {\n  return dispatch => {\n    setTimeout(() => {\n      dispatch(increment())\n    }, delay);\n  };\n}\n"
+  ]
+}
