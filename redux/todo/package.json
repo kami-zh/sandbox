@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "watch": "watchify -t [ babelify --presets [ es2015 react ] ] main.js -o 'exorcist bundle.js.map > bundle.js' -d"
+  },
+  "dependencies": {
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.5",
+    "redux-thunk": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "exorcist": "^0.4.0",
+    "watchify": "^3.6.1"
+  }
+}
