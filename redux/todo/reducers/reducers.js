@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VISIBILITY_FILTERS } from '../actions/action';
-import { SHOW_ALL } from VISIBILITY_FILTERS;
+
+const { SHOW_ALL } = VISIBILITY_FILTERS;
 
 function todo(state, action) {
   switch (action.type) {
@@ -33,7 +34,7 @@ function todos(state = [], action) {
       ];
     case COMPLETE_TODO:
       return state.map(t =>
-        todo(t, action);
+        todo(t, action)
       );
     default:
       return state;

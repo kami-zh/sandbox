@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addTodo, completeTodo, setVisibilityFilter, visibilityFilters } from '../actions';
+import { addTodo, completeTodo, setVisibilityFilter, VISIBILITY_FILTERS } from '../actions/action';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 import Footer from '../components/Footer';
@@ -37,11 +37,11 @@ App.propTypes = {
 
 function selectTodos(todos, filter) {
   switch (filter) {
-    case visibilityFilters.SHOW_ALL:
+    case VISIBILITY_FILTERS.SHOW_ALL:
       return todos;
-    case visibilityFilters.SHOW_COMPLETED:
+    case VISIBILITY_FILTERS.SHOW_COMPLETED:
       return todos.filter(todo => todo.completed);
-    case visibilityFilters.SHOW_ACTIVE:
+    case VISIBILITY_FILTERS.SHOW_ACTIVE:
       return todos.filter(todo => !todo.completed);
   }
 }
