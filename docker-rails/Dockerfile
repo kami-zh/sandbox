@@ -5,5 +5,6 @@ RUN mkdir /app
 WORKDIR /app
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
+ENV BUNDLE_PATH=/bundle
 RUN bundle install
 ADD . .
