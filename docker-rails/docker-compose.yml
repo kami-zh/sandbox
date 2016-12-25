@@ -6,6 +6,10 @@ services:
     container_name: web
     depends_on:
       - db
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     ports:
       - 3000:3000
     stdin_open: true
@@ -16,6 +20,8 @@ services:
       - bundle
   db:
     image: postgres
+  redis:
+    image: redis
   bundle:
     image: busybox
     volumes:
